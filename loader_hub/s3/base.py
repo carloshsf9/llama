@@ -70,7 +70,7 @@ class S3Reader(BaseReader):
         with tempfile.TemporaryDirectory() as temp_dir:
             if self.key:
                 suffix = Path(self.key).suffix
-                filepath = f"{temp_dir}/{next(tempfile._get_candidate_names())}{suffix}"
+                filepath = rf"{temp_dir}/{next(tempfile._get_candidate_names())}{suffix}"
                 s3_client.download_file(self.bucket, self.key, filepath)
             else:
                 bucket = s3.Bucket(self.bucket)
@@ -79,7 +79,7 @@ class S3Reader(BaseReader):
                         continue
                     suffix = Path(obj.key).suffix
                     filepath = (
-                        f"{temp_dir}/{next(tempfile._get_candidate_names())}{suffix}"
+                        rf"{temp_dir}/{next(tempfile._get_candidate_names())}{suffix}"
                     )
                     s3_client.download_file(self.bucket, obj.key, filepath)
 
